@@ -1,8 +1,11 @@
 package com.example.listandgridview
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.View
 import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.GridView
 import android.widget.ListView
 import android.widget.Toast
@@ -11,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -25,10 +29,10 @@ class MainActivity : AppCompatActivity() {
         var playerNames = arrayOf("Cristiano Ronaldo", "Joao Felix", "Bernado Silva", "Andre    Silve", "Bruno Fernandez", "William Carvalho", "Nelson Semedo", "Pepe", "Rui Patricio")
         var playerImages = intArrayOf(R.drawable.sttb, R.drawable.sttb, R.drawable.sttb, R.drawable.sttb, R.drawable.sttb, R.drawable.sttb, R.drawable.sttb, R.drawable.sttb, R.drawable.sttb)
 
-//        var listView = findViewById<ListView>(R.id.listView)
-//        arrayAdapter = ArrayAdapter(this,
-//            android.R.layout.simple_list_item_1, users)
-//        listView.adapter = arrayAdapter
+        var listView = findViewById<ListView>(R.id.listView)
+        arrayAdapter = ArrayAdapter(this,
+            android.R.layout.simple_list_item_1, users)
+        listView.adapter = arrayAdapter
 
         val gridView = findViewById<GridView>(R.id.gridView)
 
@@ -38,5 +42,25 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(applicationContext, "You CLicked " + playerNames[+position],
                 Toast.LENGTH_SHORT).show()
         }
+
+
+        val listButton = findViewById<Button>(R.id.buttonList)
+        val gridButton = findViewById<Button>(R.id.buttonGrid)
+        gridView.visibility = View.VISIBLE
+        listView.visibility = View.GONE
+
+        listButton.setOnClickListener({
+            gridView.visibility = View.GONE
+            listView.visibility = View.VISIBLE
+        })
+
+        gridButton.setOnClickListener({
+            gridView.visibility = View.VISIBLE
+            listView.visibility = View.GONE
+        })
+
+
+
+
     }
 }
